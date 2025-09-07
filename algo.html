@@ -7,7 +7,24 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <h1>Algorithm Visualizer</h1>
-    <hr>
-    <p>Welcome to the Algorithm Visualizer! This tool helps you understand various algorithms through visual representation.</p>
+  <div class="container">
+    <header>
+      <h1 style="margin:0 0 6px 0">Algo Visualizer</h1>
+      <p style="margin:0 0 16px 0;color:#a6adbb">
+        Bubble • Insertion • Selection • Merge • Quick — play/pause, step, size & speed, color-coded actions
+      </p>
+      <div class="controls">
+        <select id="algo">
+          <option>Bubble</option>
+          <option>Insertion</option>
+          <option>Selection</option>
+          <option>Merge</option>
+          <option>Quick</option>
+        </select>
+        <button id="newArray">New Array</button>
+        <button id="playPause">Play</button>
+        <button id="step">Step</button>
+        <button id="resetSteps">Reset Steps</button>
+      </div>
+    </header>
 </body>

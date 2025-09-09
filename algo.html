@@ -27,4 +27,34 @@
         <button id="resetSteps">Reset Steps</button>
       </div>
     </header>
+
+
+    <section class="grid" style="margin-top:16px">
+      <div class="card">
+        <label>Array Size: <b id="sizeLabel">40</b></label>
+        <input type="range" id="size" min="5" max="150" value="40" />
+        <label>Speed: <b id="speedLabel">50</b></label>
+        <input type="range" id="speed" min="1" max="100" value="50" />
+        <div class="muted" style="text-align:left;margin:6px 0 0 0">
+          Step #: <b id="stepCount">0</b>
+        </div>
+      </div>
+      <div class="card">
+        <div class="legend">
+          <div><span class="chip compare"></span> Compare</div>
+          <div><span class="chip swap"></span> Swap</div>
+          <div><span class="chip overwrite"></span> Overwrite</div>
+          <div><span class="chip pivot"></span> Pivot</div>
+          <div><span class="chip mark"></span> Placed</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stage" style="margin-top:16px">
+      <div id="bars" class="bars"></div>
+    </section>
+
+    <div class="muted">Tip: Use Play/Pause for animation, or Step to advance one action at a time.</div>
+  </div>
+  
 </body>

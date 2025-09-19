@@ -21,3 +21,38 @@ function* bubbleSort(a) {
   }
   yield { type: 'mark', i: 0 };
 }
+
+function* insertionSort(a) {
+  for (let i = 1; i < a.length; i++) {
+    const key = a[i];
+    let j = i - 1;
+    yield { type: 'compare', i: j, j: i };
+    while (j >= 0 && a[j] > key) {
+      a[j + 1] = a[j];
+      yield { type: 'overwrite', i: j + 1, value: a[j] };
+      j--;
+      if (j >= 0) yield { type: 'compare', i: j, j: i };
+    }
+    a[j + 1] = key;
+    yield { type: 'overwrite', i: j + 1, value: key };
+    yield { type: 'mark', i };
+  }
+  yield { type: 'mark', i: 0 };
+}
+
+function* selectionSort(a) {
+  const n = a.length;
+  for (let i = 0; i < n - 1; i++) {
+    let min = i;
+    for (let j = i + 1; j < n; j++) {
+      yield { type: 'compare', i: min, j };
+      if (a[j] < a[min]) min = j;
+    }
+    if (min !== i) {
+      [a[i], a[min]] = [a[min], a[i]];
+      yield { type: 'swap', i, j: min };
+    }
+    yield { type: 'mark', i };
+  }
+  yield { type: 'mark', i: n - 1 };
+}

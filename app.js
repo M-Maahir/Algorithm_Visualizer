@@ -91,3 +91,35 @@ function* mergeSort(a) {
   }
   yield* sort(0, a.length - 1);
 }
+
+
+function* quickSort(a) {
+  function* partition(lo, hi) {
+    const pivot = a[hi];
+    yield { type: 'pivot', i: hi };
+    let p = lo;
+    for (let j = lo; j < hi; j++) {
+      yield { type: 'compare', i: j, j: hi };
+      if (a[j] < pivot) {
+        if (j !== p) {
+          [a[p], a[j]] = [a[j], a[p]];
+          yield { type: 'swap', i: p, j };
+        }
+        p++;
+      }
+    }
+    if (p !== hi) {
+      [a[p], a[hi]] = [a[hi], a[p]];
+      yield { type: 'swap', i: p, j: hi };
+    }
+    yield { type: 'mark', i: p };
+    return p;
+  }
+  function* sort(lo, hi) {
+    if (lo >= hi) return;
+    const p = yield* partition(lo, hi);
+    yield* sort(lo, p - 1);
+    yield* sort(p + 1, hi);
+  }
+  yield* sort(0, a.length - 1);
+}

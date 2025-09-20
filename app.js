@@ -56,3 +56,38 @@ function* selectionSort(a) {
   }
   yield { type: 'mark', i: n - 1 };
 }
+
+function* mergeSort(a) {
+  const aux = a.slice();
+  function* merge(lo, mid, hi) {
+    for (let k = lo; k <= hi; k++) aux[k] = a[k];
+    let i = lo, j = mid + 1;
+    for (let k = lo; k <= hi; k++) {
+      if (i > mid) {
+        a[k] = aux[j++];
+        yield { type: 'overwrite', i: k, value: a[k] };
+      } else if (j > hi) {
+        a[k] = aux[i++];
+        yield { type: 'overwrite', i: k, value: a[k] };
+      } else {
+        yield { type: 'compare', i, j };
+        if (aux[j] < aux[i]) {
+          a[k] = aux[j++];
+          yield { type: 'overwrite', i: k, value: a[k] };
+        } else {
+          a[k] = aux[i++];
+          yield { type: 'overwrite', i: k, value: a[k] };
+        }
+      }
+    }
+  }
+  function* sort(lo, hi) {
+    if (lo >= hi) return;
+    const mid = Math.floor((lo + hi) / 2);
+    yield* sort(lo, mid);
+    yield* sort(mid + 1, hi);
+    yield* merge(lo, mid, hi);
+    yield { type: 'mark', i: hi };
+  }
+  yield* sort(0, a.length - 1);
+}

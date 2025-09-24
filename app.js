@@ -282,5 +282,4 @@ $speed.addEventListener('input', e => {
   $speedLabel.textContent = String(speed);
 });
 
-// init
 resetArray(size);

@@ -183,7 +183,7 @@ function resetArray(n = size) {
 function buildGenerator() {
   const a = workArr.slice();
   const g = ALGOS[$algo.value](a);
-  g._copy = a; // for potential debugging
+  g._copy = a; // might change this again
   return g;
 }
 
@@ -259,7 +259,6 @@ function stop() {
 
 function updateStepLabel() { $stepLabel.textContent = String(stepCount); }
 
-// events
 $new.addEventListener('click', () => resetArray());
 $play.addEventListener('click', () => (playing ? stop() : start()));
 $step.addEventListener('click', () => nextStep());
